@@ -281,7 +281,8 @@ function reverseString(str) {
  *   orderAlphabetically('abc123xyz') => '123abcxyz'
  */
 function orderAlphabetically(str) {
-  return str.sort;
+  const a = str.split('').sort().join('');
+  return a;
 }
 
 /**
@@ -296,8 +297,8 @@ function orderAlphabetically(str) {
  *   containsSubstring('JavaScript is Fun', 'Python') => false
  *   containsSubstring('12345', '34') => true
  */
-function containsSubstring(/* str, substring */) {
-  throw new Error('Not implemented');
+function containsSubstring(str, substring) {
+  return str.includes(substring);
 }
 
 /**
@@ -314,8 +315,15 @@ function containsSubstring(/* str, substring */) {
  *   countVowels('aEiOu') => 5
  *   countVowels('XYZ') => 1
  */
-function countVowels(/* str */) {
-  throw new Error('Not implemented');
+function countVowels(str) {
+  const newStr = ['a', 'e', 'i', 'o', 'u', 'y', 'A', 'E', 'I', 'O', 'U', 'Y'];
+  let count = 0;
+  newStr.forEach((elem) => {
+    for (let i = 0; i < str.length; i += 1) {
+      if (str[i] === elem) count += 1;
+    }
+  });
+  return count;
 }
 
 /**
@@ -331,8 +339,18 @@ function countVowels(/* str */) {
  *   isPalindrome('apple') => false
  *   isPalindrome('No lemon, no melon') => true
  */
-function isPalindrome(/* str */) {
-  throw new Error('Not implemented');
+function isPalindrome(str) {
+  const a = str.toLowerCase();
+  let result = '';
+  for (let i = 0; i < a.length; i += 1) {
+    if (a[i] !== ' ' && a[i] !== ',' && a[i] !== '!' && a[i] !== '?') {
+      result += a[i];
+    }
+  }
+  if (result.split('').reverse().join('') === result) {
+    return true;
+  }
+  return false;
 }
 
 /**
@@ -347,8 +365,21 @@ function isPalindrome(/* str */) {
  *   findLongestWord('A long and winding road') => 'winding'
  *   findLongestWord('No words here') => 'words'
  */
-function findLongestWord(/* sentence */) {
-  throw new Error('Not implemented');
+function findLongestWord(sentence) {
+  const a = sentence.split(' ');
+  function compareNumbers(o, y) {
+    return o.length - y.length;
+  }
+  const b = a.sort(compareNumbers);
+  const c = b[b.length - 1].length;
+  let j;
+  for (let i = 0; i < b.length; i += 1) {
+    if (b[i].length === c) {
+      j = b[i];
+      break;
+    }
+  }
+  return j;
 }
 
 /**
@@ -361,8 +392,13 @@ function findLongestWord(/* sentence */) {
  *   reverseWords('Hello World') => 'olleH dlroW'
  *   reverseWords('The Quick Brown Fox') => 'ehT kciuQ nworB xoF'
  */
-function reverseWords(/* str */) {
-  throw new Error('Not implemented');
+function reverseWords(str) {
+  const a = str.split(' ');
+  const b = [];
+  a.forEach((elem) => {
+    b.push(elem.split('').reverse().join(''));
+  });
+  return b.join(' ');
 }
 
 /**
@@ -376,8 +412,16 @@ function reverseWords(/* str */) {
  *   invertCase('JavaScript is Fun') => 'jAVAsCRIPT IS fUN'
  *   invertCase('12345') => '12345'
  */
-function invertCase(/* str */) {
-  throw new Error('Not implemented');
+function invertCase(str) {
+  let result = '';
+  for (let i = 0; i < str.length; i += 1) {
+    if (str[i] === str[i].toLowerCase()) {
+      result += str[i].toUpperCase();
+    } else {
+      result += str[i].toLowerCase();
+    }
+  }
+  return result;
 }
 
 /**
@@ -393,8 +437,8 @@ function invertCase(/* str */) {
  *   getStringFromTemplate('John','Doe') => 'Hello, John Doe!'
  *   getStringFromTemplate('Chuck','Norris') => 'Hello, Chuck Norris!'
  */
-function getStringFromTemplate(/* firstName, lastName */) {
-  throw new Error('Not implemented');
+function getStringFromTemplate(firstName, lastName) {
+  return `Hello, ${firstName} ${lastName}!`;
 }
 
 /**
@@ -407,8 +451,8 @@ function getStringFromTemplate(/* firstName, lastName */) {
  *   extractNameFromTemplate('Hello, John Doe!') => 'John Doe'
  *   extractNameFromTemplate('Hello, Chuck Norris!') => 'Chuck Norris'
  */
-function extractNameFromTemplate(/* value */) {
-  throw new Error('Not implemented');
+function extractNameFromTemplate(value) {
+  return value.slice(7, value.length - 1);
 }
 
 /**
@@ -422,8 +466,8 @@ function extractNameFromTemplate(/* value */) {
  *   unbracketTag('<span>') => 'span'
  *   unbracketTag('<a>') => 'a'
  */
-function unbracketTag(/* str */) {
-  throw new Error('Not implemented');
+function unbracketTag(str) {
+  return str.slice(1, str.length - 1);
 }
 
 /**
@@ -441,8 +485,8 @@ function unbracketTag(/* str */) {
  *   ],
  *   'info@gmail.com' => ['info@gmail.com']
  */
-function extractEmails(/* str */) {
-  throw new Error('Not implemented');
+function extractEmails(str) {
+  return str.split(';');
 }
 
 /**
@@ -461,8 +505,31 @@ function extractEmails(/* str */) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  const a = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+  let result = '';
+  for (let i = 0; i < str.length; i += 1) {
+    if (str[i] === '!' || str[i] === '?' || str[i] === ' ') {
+      result += str[i];
+    }
+    for (let j = 0; j < a.length; j += 1) {
+      if (str[i] === a[j]) {
+        if (j + 13 >= a.length) {
+          if (str[i] === str[i].toLowerCase()) {
+            result += a[(j + 13) % a.length].toLowerCase();
+          } else {
+            result += a[(j + 13) % a.length].toUpperCase();
+          }
+        } else {
+          result +=
+            str[i] === str[i].toLowerCase()
+              ? a[j + 13].toLowerCase()
+              : a[j + 13].toUpperCase();
+        }
+      }
+    }
+  }
+  return result;
 }
 
 /**
@@ -489,9 +556,20 @@ function encodeToRot13(/* str */) {
  *   'Q♠' => 50
  *   'K♠' => 51
  */
-function getCardId(/* value */) {
-  throw new Error('Not implemented');
+// prettier-ignore
+function getCardId(value) {
+  let a;
+  const arr = ['A♣','2♣','3♣','4♣','5♣','6♣','7♣','8♣','9♣','10♣','J♣','Q♣','K♣',
+    'A♦','2♦','3♦','4♦','5♦','6♦','7♦','8♦','9♦','10♦','J♦','Q♦','K♦',
+    'A♥','2♥','3♥','4♥','5♥','6♥','7♥','8♥','9♥','10♥','J♥','Q♥','K♥',
+    'A♠','2♠','3♠','4♠','5♠','6♠','7♠','8♠','9♠','10♠','J♠','Q♠','K♠'];
+
+    arr.forEach((elem, ind) => {
+      if(elem === value) a = ind;
+    })
+    return a;
 }
+console.log(getCardId('K♠'));
 
 module.exports = {
   getStringLength,
