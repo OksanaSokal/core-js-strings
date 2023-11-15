@@ -569,7 +569,6 @@ function getCardId(value) {
     })
     return a;
 }
-console.log(getCardId('K♠'));
 
 module.exports = {
   getStringLength,
